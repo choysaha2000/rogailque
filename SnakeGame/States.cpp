@@ -398,7 +398,7 @@ void UI::StartMenuState()
             if (color != sf::Color::Transparent) itemText.setFillColor(color);
         };
 
-    setTextParameters(menuText, "ARKANOID", 50, sf::Color::Green);
+    setTextParameters(menuText, "ROGALIQUE", 50, sf::Color::Green);
     menuText.setPosition(
         (SETTINGS.SCREEN_WIDTH - menuText.getGlobalBounds().width) / 2.f,
         SETTINGS.SETTINGS.SCREEN_HEIGHT / 2.f - 100.f);
