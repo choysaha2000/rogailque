@@ -11,6 +11,7 @@ Game::Game()
     if (playinStateMusic.openFromFile(SETTINGS.RESOURCES_PATH + "PlayingState.ogg")) {
         playinStateMusic.setLoop(true);
     }
+
     assert(Sound1.loadFromFile(SETTINGS.RESOURCES_PATH + "AppleEat.wav")); 
     assert(Sound2.loadFromFile(SETTINGS.RESOURCES_PATH + "Lose.wav"));     
 
@@ -77,10 +78,154 @@ void Game::Update(float deltaTime, sf::RenderWindow& window)
 
     if (state == GameState::Playing)
     {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        paddle.Update(deltaTime, *this, window);
+        ball.Update(deltaTime, *this, window);
+
+        // collision
+        sf::Vector2f ballPos = ball.GetPosition();
+        sf::FloatRect ballBounds = ball.GetBounds();
+        sf::FloatRect paddleBounds = paddle.GetBounds();
+
+
+        if (ballPos.x - SETTINGS.BALL_RADIUS < 0) ball.BounceX();
+        if (ballPos.x + SETTINGS.BALL_RADIUS > SETTINGS.SCREEN_WIDTH) ball.BounceX();
+        if (ballPos.y - SETTINGS.BALL_RADIUS < 0) ball.BounceY();
+
+        // game over 
+        if (ballPos.y + SETTINGS.BALL_RADIUS > SETTINGS.SCREEN_HEIGHT)
         {
-            SwitchGameState(GameState::Menu);
+            if (isSoundOn) LoseSound.play();
+            isGameFinished = true;
+            SwitchGameState(GameState::GameOver);
+            return;
         }
+
+
+        int activeBlocks = 0;
+
+
+        for (auto& block : blocks)
+        {
+            if (!block->IsDestroyed())
+            {
+                activeBlocks++;
+                if (ballBounds.intersects(block->GetBounds()))
+                {
+                    bool wasAlive = !block->IsDestroyed();
+                    block->Hit();
+
+                    if (block->IsDestroyed())
+                    {
+                        NotifyScore(ScoreEvent::BrickDestroyed); // Уничтожен
+                        // Спавним бонус с вероятностью 30%
+if (rand() % 100 < 30)
+{
+    sf::Vector2f spawnPosition(block->GetBounds().left, block->GetBounds().top);
+
+    // рандомно выбираем тип бонуса
+
+    int roll = rand() % 3;
+    Bonus b;
+    if (roll == 0)
+    {
+        b.Spawn(spawnPosition, std::make_unique<FireBallEffect>());
+    }
+
+    else if (roll == 1) {
+        b.Spawn(spawnPosition, std::make_unique<WidePaddleEffect>());
+    }
+    else {
+        b.Spawn(spawnPosition, std::make_unique<SlowBallEffect>());
+    }
+
+    bonuses.push_back(std::move(b));
+}
+                    }
+                    else
+                    {
+                        NotifyScore(ScoreEvent::BrickHit); // Только попадание
+                    }
+
+                    // Огненный мяч не отскакивает (пробивает)
+                    if (!ball.IsPiersing()) ball.BounceY();
+                    PlayHitSound();
+                    break;
+                }
+            }
+        }
+
+        for (auto& bonus : bonuses)
+        {
+            bonus.Update(deltaTime, *this, window);
+
+            // Чистим собранные
+
+            bonuses.erase(
+                std::remove_if(bonuses.begin(), bonuses.end(),
+                    [](auto& b) { return b.IsCollected(); }),
+                bonuses.end());
+
+        }
+
+        if (activeBlocks == 0)
+        {
+
+            SwitchGameState(GameState::Win);
+        }
+
+        if (activeBonusEffect != nullptr)
+        {
+            bonusTimer -= deltaTime;
+
+            if (bonusTimer <= 0.f)
+            {
+                // время вышло - снимаем эффект
+
+                activeBonusEffect->Remove(ball, paddle);
+                activeBonusEffect.reset();
+            }
+        }
+
+        // платформа - наблюдатель
+
+        if (ballBounds.intersects(paddleBounds) && ball.GetVelocity().y > 0)
+        {
+            ball.BounceY();
+            PlayHitSound();
+            NotifyScore(ScoreEvent::PaddleHit);
+            ui.scoreText.setString("Score: " + std::to_string(GetScore()));
+
+        }
+
+
+        // сохранения и загрузка во время игры 
+        static float saveLoadCoolDown = 0.f;
+        saveLoadCoolDown -= deltaTime;
+        // отнимаем время у таймера отрисовки (если они больше нуля)
+        if (savePopupTimer > 0.f) savePopupTimer -= deltaTime;
+        if (loadPopupTimer > 0.f) loadPopupTimer -= deltaTime;
+
+        if (saveLoadCoolDown <= 0.f)
+        {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::F5))
+            {
+                QuickSave();
+                saveLoadCoolDown = 1.0f;
+                savePopupTimer = 2.0f;
+            }
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::F9))
+            {
+                if (HasQuickSave())
+                {
+                    QuickLoad();
+                    saveLoadCoolDown = 1.0f;
+                    loadPopupTimer = 2.0f;
+                }
+            }
+        }
+       
+       
     }
 }
 
@@ -94,7 +239,14 @@ void Game::Draw(sf::RenderWindow& window)
 
     if (state == GameState::Playing)
     {
+        paddle.Draw(window);
+        ball.Draw(window);
+        for (auto& block : blocks)
+        {
+            block->Draw(window);
+        }
         ui.DrawPlaying(*this, window);
+  
     }
     else if (state == GameState::GameOver)
     {

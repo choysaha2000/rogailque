@@ -47,8 +47,8 @@ void UI::Init(Game& game)
     BackToMenu.setCharacterSize(30);
     BackToMenu.setFillColor(sf::Color::White);
     BackToMenu.setPosition(20.f,
-        SETTINGS.SCREEN_WIDTH - BackToMenu.getGlobalBounds().width - 40.f);
-    BackToMenu.setString("TO BE DONE Press SPACE to exit to menu");
+        SETTINGS.SETTINGS.SCREEN_HEIGHT - BackToMenu.getGlobalBounds().height - 40.f);
+    BackToMenu.setString("Press Backspace to back to menu");
 
     Save.setFont(font);
     Save.setCharacterSize(30);
@@ -398,7 +398,7 @@ void UI::StartMenuState()
             if (color != sf::Color::Transparent) itemText.setFillColor(color);
         };
 
-    setTextParameters(menuText, "ROGALIQUE", 50, sf::Color::Green);
+    setTextParameters(menuText, "ROGALIQUE", 50, sf::Color::Magenta);
     menuText.setPosition(
         (SETTINGS.SCREEN_WIDTH - menuText.getGlobalBounds().width) / 2.f,
         SETTINGS.SETTINGS.SCREEN_HEIGHT / 2.f - 100.f);
@@ -668,27 +668,26 @@ void UI::UpdateLeaderboardGameOver(int playerScore, std::string name)
     gameOverText.setPosition(50.f, 100.f);
 }
 
-
-// ingamestate
-
 void UI::DrawPlaying(Game& game, sf::RenderWindow& window)
 {
-    window.draw(BackToMenu);
-
+    window.draw(scoreText);
+    window.draw(PlayerRecord);
 }
+
+
 
 void UI::StartPlayinState(Game& game)
 {
-   // game.GetPaddle().Init(game); 
-   // game.GetBall().Init(game);
-   // game.InitLevel();
+    game.GetPaddle().Init(game); 
+    game.GetBall().Init(game);
+    game.InitLevel();
 
-   // game.ResetScore();
-   // scoreText.setString("Score: 0"); 
+    game.ResetScore();
+    scoreText.setString("Score: 0"); 
 
-  // if (game.IsMusicOn()) {
-//        game.PlayMusic();
-//}
+    if (game.IsMusicOn()) {
+        game.PlayMusic();
+    }
 }
 
 // Win State
