@@ -14,7 +14,7 @@ namespace XYZengine
 	{
 	public:
 
-		float speed = 200.0f; // скорость движения
+		float speed = 350.0f; // скорость движения
 
         void Update(float deltaTime) override
         {

@@ -6,7 +6,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SFMLTemplate", "SFMLTemplat
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SFML", "SFML\SFML.vcxproj", "{0D9DFFE7-5BF2-448D-8639-0FE0BBB8230A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SnakeGame", "SnakeGame\SnakeGame.vcxproj", "{5EED66FD-2170-4B8C-BBF5-CF9DCDE3A863}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Rogalique", "SnakeGame\SnakeGame.vcxproj", "{5EED66FD-2170-4B8C-BBF5-CF9DCDE3A863}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Engine.vcxproj", "{FB5C0C20-5583-40A9-B6FF-BB1DD01EF83D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineTest", "EngineTest\EngineTest.vcxproj", "{BCC7A8B0-11BF-4590-949F-B75778DB41F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +44,22 @@ Global
 		{5EED66FD-2170-4B8C-BBF5-CF9DCDE3A863}.Release|x64.Build.0 = Release|x64
 		{5EED66FD-2170-4B8C-BBF5-CF9DCDE3A863}.Release|x86.ActiveCfg = Release|Win32
 		{5EED66FD-2170-4B8C-BBF5-CF9DCDE3A863}.Release|x86.Build.0 = Release|Win32
+		{FB5C0C20-5583-40A9-B6FF-BB1DD01EF83D}.Debug|x64.ActiveCfg = Debug|x64
+		{FB5C0C20-5583-40A9-B6FF-BB1DD01EF83D}.Debug|x64.Build.0 = Debug|x64
+		{FB5C0C20-5583-40A9-B6FF-BB1DD01EF83D}.Debug|x86.ActiveCfg = Debug|Win32
+		{FB5C0C20-5583-40A9-B6FF-BB1DD01EF83D}.Debug|x86.Build.0 = Debug|Win32
+		{FB5C0C20-5583-40A9-B6FF-BB1DD01EF83D}.Release|x64.ActiveCfg = Release|x64
+		{FB5C0C20-5583-40A9-B6FF-BB1DD01EF83D}.Release|x64.Build.0 = Release|x64
+		{FB5C0C20-5583-40A9-B6FF-BB1DD01EF83D}.Release|x86.ActiveCfg = Release|Win32
+		{FB5C0C20-5583-40A9-B6FF-BB1DD01EF83D}.Release|x86.Build.0 = Release|Win32
+		{BCC7A8B0-11BF-4590-949F-B75778DB41F5}.Debug|x64.ActiveCfg = Debug|x64
+		{BCC7A8B0-11BF-4590-949F-B75778DB41F5}.Debug|x64.Build.0 = Debug|x64
+		{BCC7A8B0-11BF-4590-949F-B75778DB41F5}.Debug|x86.ActiveCfg = Debug|Win32
+		{BCC7A8B0-11BF-4590-949F-B75778DB41F5}.Debug|x86.Build.0 = Debug|Win32
+		{BCC7A8B0-11BF-4590-949F-B75778DB41F5}.Release|x64.ActiveCfg = Release|x64
+		{BCC7A8B0-11BF-4590-949F-B75778DB41F5}.Release|x64.Build.0 = Release|x64
+		{BCC7A8B0-11BF-4590-949F-B75778DB41F5}.Release|x86.ActiveCfg = Release|Win32
+		{BCC7A8B0-11BF-4590-949F-B75778DB41F5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

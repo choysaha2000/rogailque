@@ -134,18 +134,12 @@ void Game::Update(float deltaTime, sf::RenderWindow& window)
 
     if (state == GameState::Playing)
     {
-       
         world.Update(deltaTime);
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
             SwitchGameState(GameState::Menu);
         }
     }
-
-   
-
-
-
 }
 
 
