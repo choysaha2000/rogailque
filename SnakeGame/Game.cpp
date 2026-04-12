@@ -30,6 +30,63 @@ Game::Game()
     SetGameSettings();
     PushGameState(GameState::Menu);
     scoreEventBus.Subscribe(&scoreSystem);
+
+    resources.LoadSound("bg", "music.ogg");
+    auto* obj = new XYZengine::GameObject();
+    auto& audio = obj->AddComponent<XYZengine::AudioComponent>();
+    audio.PlayMusic("Resources/music.ogg", true);
+    world.AddObject(obj);
+
+    resources.LoadTexture("player", "Resources/Player.png");
+    resources.LoadTexture("enemy", "Resources/apple.png");
+    resources.LoadTexture("wall", "Resources/green.png");
+
+
+
+
+    /*player*/
+    player = new XYZengine::GameObject();
+
+    auto& pt = player->AddComponent<XYZengine::TransformComponent>();
+    pt.x = 200.f;
+    pt.y = 200.f;
+
+    auto& ps = player->AddComponent<XYZengine::SpriteRenderComponent>();
+
+    /*math sprite */
+    ps.sprite.setTexture(resources.GetTexture("player"));
+    SetSpriteSize(ps.sprite, 64.f, 64.f);
+    SetSpriteRelativeOrigin(ps.sprite, 0.5f, 0.5f);
+
+    player->AddComponent<XYZengine::BoxColliderComponent>(64.f,64.f);
+    player->AddComponent<XYZengine::InputComponent>();
+
+    world.AddObject(player);
+
+
+    /* enemy*/
+    auto* enemy = new XYZengine::GameObject();
+    auto& et = enemy->AddComponent<XYZengine::TransformComponent>();
+
+    et.x = 500.f;
+    et.y = 300.f;
+
+    auto& es = enemy->AddComponent<XYZengine::SpriteRenderComponent>();
+    es.sprite.setTexture(resources.GetTexture("enemy"));
+
+    /*math sprite*/
+    SetSpriteSize(es.sprite, 48.f, 48.f);
+    SetSpriteRelativeOrigin(es.sprite, 0.5f, 0.5f);
+
+    enemy->AddComponent<XYZengine::BoxColliderComponent>(48.f, 48.f);
+
+    auto& follow = enemy->AddComponent<XYZengine::EnemyFollowComponent>();
+    follow.target = player;
+
+    world.AddObject(enemy);
+
+    CreateLevel(world, resources);
+
 }
 
 void Game::InitLevel()
@@ -77,11 +134,18 @@ void Game::Update(float deltaTime, sf::RenderWindow& window)
 
     if (state == GameState::Playing)
     {
+       
+        world.Update(deltaTime);
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
         {
             SwitchGameState(GameState::Menu);
         }
     }
+
+   
+
+
+
 }
 
 
@@ -94,6 +158,7 @@ void Game::Draw(sf::RenderWindow& window)
 
     if (state == GameState::Playing)
     {
+        renderSystem.Render(window, world.GetObjects());
         ui.DrawPlaying(*this, window);
     }
     else if (state == GameState::GameOver)
@@ -171,6 +236,8 @@ void Game::SetGameSettings()
         ApplyScoreStrategy(std::make_unique<ClassicScoreStrategy>());
     }
 
+ 
+
 
 }
 
@@ -207,6 +274,43 @@ void Game::SwitchGameState(GameState newState)
 GameState Game::GetCurrentGameState() const
 {
     return gameStateStack.empty() ? GameState::None : gameStateStack.back();
+}
+
+
+// level 
+inline void Game::CreateLevel(XYZengine::GameWorld& world, XYZengine::ResourseSystem& resources)
+{
+    float size = 64.0f; // размер одной плитки (вынести в константы)
+    int columns = 15;
+    int rows = 10;
+
+    for (int x = 0; x < columns; x++)
+    {
+        for (int y = 0; y < rows; y++)
+        {
+            // Ставим стену только если этой край карты
+            if (x == 0 || x == columns - 1 || y == 0 || y == rows - 1)
+            {
+                auto* wall = new XYZengine::GameObject();
+
+                auto& t = wall->AddComponent<XYZengine::TransformComponent>();
+                t.x = x * size;
+                t.y = y * size;
+
+                auto& s = wall->AddComponent<XYZengine::SpriteRenderComponent>();
+                s.sprite.setTexture(resources.GetTexture("wall"));
+
+                SetSpriteSize(s.sprite, 64.f, 64.f);
+                SetSpriteRelativeOrigin(s.sprite, 0.f, 0.f);
+
+                wall->AddComponent<XYZengine::BoxColliderComponent>();
+
+                world.AddObject(wall);
+
+            }
+        }
+    }
+
 }
 
 void Game::SwitchGameStateInternal(GameState oldState, GameState newState)

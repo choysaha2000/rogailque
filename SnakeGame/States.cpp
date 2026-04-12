@@ -46,9 +46,8 @@ void UI::Init(Game& game)
     BackToMenu.setFont(font);
     BackToMenu.setCharacterSize(30);
     BackToMenu.setFillColor(sf::Color::White);
-    BackToMenu.setPosition(20.f,
-        SETTINGS.SCREEN_WIDTH - BackToMenu.getGlobalBounds().width - 40.f);
-    BackToMenu.setString("TO BE DONE Press SPACE to exit to menu");
+    BackToMenu.setPosition(250.f, 20.f);
+    BackToMenu.setString("Press SPACE to exit to menu");
 
     Save.setFont(font);
     Save.setCharacterSize(30);

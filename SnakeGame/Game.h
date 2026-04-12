@@ -21,6 +21,18 @@
 #include "ScoreStrategy.h"
 #include <ctime>
 
+/*engine*/
+#include "Engine.h"
+#include "GameWorld.h"
+#include "GameObject.h"
+#include "TransformComponent.h"
+#include "ResourceSystem.h"
+#include "SpriteRenderComponent.h"
+#include "AudioComponent.h"
+#include "InputComponent.h"
+#include "EnemyFollowComponent.h"
+#include "RenderSystem.h"
+
 
 const std::string SAVE_FILE = "records.txt";
 
@@ -212,6 +224,8 @@ public:
     uint32_t GetgameMode() const { return gameMode; }
     void SetgameMode(uint32_t gameModes) { gameMode = gameModes; }
 
+
+    void CreateLevel(XYZengine::GameWorld& world, XYZengine::ResourseSystem& resources);
 private:
     // local logic
     void SwitchGameStateInternal(GameState oldState, GameState newState);
@@ -277,5 +291,16 @@ private:
 
     float savePopupTimer = 0.f;
     float loadPopupTimer = 0.f;
+
+    sf::RenderWindow window;
+
+    /*engine shit*/
+
+    XYZengine::GameWorld world;
+    XYZengine::ResourseSystem resources;
+    XYZengine::RenderSystem renderSystem;
+
+    XYZengine::GameObject* player = nullptr;
+    XYZengine::GameObject* enemy = nullptr;
 
 };

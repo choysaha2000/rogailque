@@ -28,6 +28,8 @@ void Application::Run()
 
 	// game loop
 
+
+
     while (window.isOpen())
     {
         float currentTime = gameClock.getElapsedTime().asSeconds();

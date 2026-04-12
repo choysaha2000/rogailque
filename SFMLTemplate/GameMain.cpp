@@ -3,33 +3,28 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include "Engine.h"
+#include "GameWorld.h"
+#include "GameObject.h"
+#include "TransformComponent.h"
 
 const std::string RESOURCES_PATH = "Resources/";
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(330, 400), "SFML works!");
 
-	sf::Texture logo;
-	if (!logo.loadFromFile(RESOURCES_PATH + "xyz-logo.png"))
-	{
-		return EXIT_FAILURE;
-	}
-	sf::Sprite logo_sprite(logo);
+	Engine engine;
+	engine.Initialize();
+	engine.Run();
 
-	while (window.isOpen())
-	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
+	XYZengine::GameWorld world;
 
-		window.clear();
-		window.draw(logo_sprite);
-		window.display();
-	}
+	auto* obj = new XYZengine::GameObject();
+	world.AddObject(obj);
+
+	obj->AddComponent<XYZengine::TransformComponent>();
+
+	world.Update(0.016f);
 
 	return 0;
 }
