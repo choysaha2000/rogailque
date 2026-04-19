@@ -12,12 +12,14 @@ namespace XYZengine
 	{
 	public:
 		sf::FloatRect rect; // пр€мугольник коллизии
+		bool blocksMovement = true;
 
 		// »нициализируем размер (64х64)
-		BoxColliderComponent(float width = 64.0f, float height = 64.0f)
+		BoxColliderComponent(float width = 64.0f, float height = 64.0f, bool blocks = true)
 		{
 			rect.width = width;
 			rect.height = height;
+			blocksMovement = blocks;
 		}
 
 		void Update(float deltaTime) override

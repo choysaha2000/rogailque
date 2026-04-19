@@ -32,7 +32,14 @@
 #include "InputComponent.h"
 #include "EnemyFollowComponent.h"
 #include "RenderSystem.h"
+#include "HealthComponent.h"
 
+/*Logger*/
+
+#include "Logger.h"
+#include "ConsoleLogSink.h"
+#include "FileLogSink.h"
+#include "Cassert"
 
 const std::string SAVE_FILE = "records.txt";
 
@@ -68,6 +75,10 @@ public:
 
     // main cicle
     void Update(float deltaTime, sf::RenderWindow& window);
+
+    void PlayerUpdate(float deltaTime, sf::RenderWindow& window);
+    void EnemyUpdate(float deltaTime, sf::RenderWindow& window);
+
     void Draw(sf::RenderWindow& window);
     void Restart();
     void SetGameSettings();
@@ -303,4 +314,8 @@ private:
     XYZengine::GameObject* player = nullptr;
     XYZengine::GameObject* enemy = nullptr;
 
+    float playerAttackCooldown = 0.0f;
+    float enemyAttcakCoolDown = 0.0f;
+
+    float EnemyPOS = 0.0f;
 };

@@ -4,6 +4,7 @@
 #include "TransformComponent.h"
 #include "GameObject.h"
 #include <cmath>
+#include "Logger.h"
 
 namespace XYZengine
 {
@@ -15,8 +16,11 @@ namespace XYZengine
 
 		void Update(float deltaTime) override
 		{
-			if (!target) return;
-
+			if (!target)
+			{
+				Logger::Instance().Warning("EnemyFollowComponent: target is null");
+				return;
+			}
 			auto* myTrans = owner->GetComponent<TransformComponent>();
 			auto* targetTrans = target->GetComponent<TransformComponent>();
 
@@ -33,8 +37,15 @@ namespace XYZengine
 				{
 					myTrans->x += (dx / lenght) * speed * deltaTime;
 					myTrans->y += (dy / lenght) * speed * deltaTime;
+					//Logger::Instance().Debug("Debug is moving toward player");
 				}
 
+			}
+
+			if (!myTrans || !targetTrans)
+			{
+				Logger::Instance().Warning("EnemyFollowComponent: missing transform");
+				return;
 			}
 		}
 	};

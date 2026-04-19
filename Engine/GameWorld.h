@@ -41,7 +41,7 @@ namespace XYZengine
 		
 				auto* collider = obj->GetComponent<BoxColliderComponent>();
 
-				if (collider)
+				if (collider && collider->blocksMovement)
 				{
 					if (collider->rect.intersects(targetRect))
 					{

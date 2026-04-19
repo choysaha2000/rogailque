@@ -678,16 +678,7 @@ void UI::DrawPlaying(Game& game, sf::RenderWindow& window)
 
 void UI::StartPlayinState(Game& game)
 {
-   // game.GetPaddle().Init(game); 
-   // game.GetBall().Init(game);
-   // game.InitLevel();
 
-   // game.ResetScore();
-   // scoreText.setString("Score: 0"); 
-
-  // if (game.IsMusicOn()) {
-//        game.PlayMusic();
-//}
 }
 
 // Win State

@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Audio.hpp>
 #include "Component.h"
+#include <string>
+#include "Logger.h"
 
 
 namespace XYZengine
@@ -18,6 +20,12 @@ namespace XYZengine
 			{
 				music.setLoop(loop);
 				music.play();
+				Logger::Instance().Info("Music started: " + path);
+			}
+
+			else
+			{
+				Logger::Instance().Info("Failed to start music" + path);
 			}
 		}
 
@@ -27,6 +35,7 @@ namespace XYZengine
 		{
 			sound.setBuffer(buffer);
 			sound.play();
+			Logger::Instance().Debug("Sound effect played");
 		}
 
 	};

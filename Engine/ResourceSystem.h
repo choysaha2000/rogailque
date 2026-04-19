@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "GameObject.h"
+#include "Logger.h"
 
 
 
@@ -22,8 +23,12 @@ namespace XYZengine
 			if (tex.loadFromFile(path))
 			{
 				textures[key] = tex;
+
+				Logger::Instance().Info("Texture loaded: " + key + " from " + path); // INFO
 				return true;
 			}
+
+			Logger::Instance().Error("Failed to load texture: " + path); // ERROR
 			return false;
 		}
 
@@ -31,8 +36,14 @@ namespace XYZengine
 		// получаем ссылку на текстуру по имени
 
 		sf::Texture& GetTexture(const std::string& key)
+		{;
+		auto it = textures.find(key);
+		if (it == textures.end())
 		{
-			return textures[key];
+			Logger::Instance().Error("Texture key not found: " + key);
+			throw std::runtime_error("Texture key not found" + key);
+		}
+		return it->second;
 		}
 
 		// аналогично для звуков
@@ -43,9 +54,14 @@ namespace XYZengine
 			if (buffer.loadFromFile(path))
 			{
 				sounds[key] = buffer;
+
+				Logger::Instance().Info("Sound loaded: " + key + " from " + path); // INFO
 				return true;
 			}
 			return false;
+
+			Logger::Instance().Error("Failed to load sound: " + path); // ERROR
+			
 		}
 
 

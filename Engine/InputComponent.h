@@ -6,6 +6,8 @@
 #include "GameObject.h"
 #include "GameWorld.h"
 
+#include "Logger.h"
+
 // компонент принимающей команды клавы и мен€ющий координаты в TransFormCMP
 
 namespace XYZengine
@@ -23,7 +25,7 @@ namespace XYZengine
 
             if (!transform || !myCollider || !owner->world)
             {
-                std::cout << "Input blocked: missing transform/collider/world\n";
+                Logger::Instance().Warning("InputComponent skipped: missing transform/collider/world"); // warning
                 return;
             }
 
