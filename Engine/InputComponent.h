@@ -8,8 +8,8 @@
 
 #include "Logger.h"
 
-// компонент принимающей команды клавы и мен€ющий координаты в TransFormCMP
 
+// That CMP is catch input command and changing coordinates in TransFormCMP
 namespace XYZengine
 {
 	class InputComponent : public Component

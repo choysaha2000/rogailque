@@ -12,7 +12,8 @@ namespace XYZengine
 
 		Matrix2D() { Identity(); }
 
-		// делает матрицу единичной (сброс)
+		
+		// making matrix single 
 
 		void Identity()
 		{
@@ -25,7 +26,8 @@ namespace XYZengine
 			}
 		}
 
-		// создание матрицы перемещения
+
+		// create matrix of moving
 
 		static Matrix2D Translation(float x, float y)
 		{
@@ -35,7 +37,8 @@ namespace XYZengine
 			return result;
 		}
 
-		// создание матрицы поворота (угол в радианах)
+
+		// create matrix of angle (in rad)
 
 		static Matrix2D Rotation(float angle)
 		{
@@ -48,6 +51,7 @@ namespace XYZengine
 		}
 
 		// произведение матриц 
+		// matrix multipie
 
 		Matrix2D operator* (const Matrix2D& other) const
 		{

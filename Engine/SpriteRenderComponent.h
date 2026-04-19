@@ -1,6 +1,6 @@
 #pragma once
-// компонент связывает текстуру из ResourceSystem и матрицу из TransformComp
 
+// CMP is collecting textures from ResourceSystem and Matrix from TransformCMP
 
 #include <SFML/Graphics.hpp>
 #include "Component.h"
@@ -13,18 +13,20 @@ namespace XYZengine
 	public: 
 		sf::Sprite sprite;
 
-		// метод отрисовки, который будет вызываться сис рендеринга
+
+		// Method of drawing, that ones would be calling sysRender
 
 		void Draw(sf::RenderWindow& window)
 		{
-			// матрица из TFC
+			// matrix from TFC
 
 			auto* transform = owner->GetComponent<TransformComponent>();
 
 
 			if (transform)
 			{
-				// передаем координаты из transform
+	
+				// give coordinates from Transform
 
 				sprite.setPosition(transform->x, transform->y);
 				sprite.setRotation(transform->rotation);

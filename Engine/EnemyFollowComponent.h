@@ -1,5 +1,5 @@
 #pragma once
-// комп преследовани€. враг знает где игрок и т€нет свои координаты к нему
+// enemy is following to player
 #include "Component.h"
 #include "TransformComponent.h"
 #include "GameObject.h"
@@ -11,7 +11,7 @@ namespace XYZengine
 	class EnemyFollowComponent : public Component
 	{
 	public:
-		GameObject* target = nullptr; // объект охоты
+		GameObject* target = nullptr; // object of an hunting
 		float speed = 100.0f;
 
 		void Update(float deltaTime) override
@@ -26,11 +26,11 @@ namespace XYZengine
 
 			if (myTrans && targetTrans)
 			{
-				// вектор направлени€ к цели
+				// vector to player
 				float dx = targetTrans->x - myTrans->x;
 				float dy = targetTrans->y - myTrans->y;
 
-				// чтобы не летел быстрее по диагонали
+				// cannot move faster on diaganal 
 
 				float lenght = sqrt(dx * dx + dy * dy);
 				if (lenght > 1.0)

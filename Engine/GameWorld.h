@@ -1,6 +1,6 @@
 #pragma once
-// Менеджер хранящий все объекты в текущей 
-// сцене и обновляет их в каждом кадре.
+
+// Manager is collecting all object in that scene and refresh that ones for every Frame
 #include <vector>
 #include "GameObject.h"
 #include "BoxColliderComponent.h"

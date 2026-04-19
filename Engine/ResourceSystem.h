@@ -8,14 +8,16 @@
 
 
 
-// Чтобы не загружать одну и ту же текстуру несколько раз нужен централизованный склад
+
+// That cannot load same texture for many times in a central farm
 
 namespace XYZengine
 {
 	class ResourseSystem
 	{
 	public:
-		// загружаем текстуру и сохраняем ее под именем key
+
+		// load texture and save that in name key. 
 		
 		bool LoadTexture(const std::string& key, const std::string& path)
 		{
@@ -33,7 +35,8 @@ namespace XYZengine
 		}
 
 
-		// получаем ссылку на текстуру по имени
+
+		// catch & of a texture by a name
 
 		sf::Texture& GetTexture(const std::string& key)
 		{;
@@ -46,7 +49,8 @@ namespace XYZengine
 		return it->second;
 		}
 
-		// аналогично для звуков
+	
+		// same for a sound
 
 		bool LoadSound(const std::string& key, const std::string& path)
 		{

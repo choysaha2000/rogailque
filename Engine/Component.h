@@ -1,5 +1,7 @@
 #pragma once
-// интерефйс для навыко сущностей
+
+// Interface for entity's skills. 
+
 namespace XYZengine
 {
 	
@@ -10,7 +12,8 @@ namespace XYZengine
 		public:
 			virtual ~Component() = default;
 
-			// Ссылка на объект-владелец, чтобы комп мог обращаться к другим комп
+	
+			// & to object-boss so PC could talk to others
 
 			GameObject* owner = nullptr;
 

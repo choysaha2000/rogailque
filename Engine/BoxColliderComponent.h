@@ -4,17 +4,17 @@
 #include "TransformComponent.h"
 #include "GameObject.h"
 
-// Комп описывает прямоугольник, через который нельзя пройти
 
+// Drawing square with 4 angles that cannot be crossed.
 namespace XYZengine
 {
 	class  BoxColliderComponent : public Component
 	{
 	public:
-		sf::FloatRect rect; // прямугольник коллизии
+		sf::FloatRect rect; // square collision
 		bool blocksMovement = true;
 
-		// Инициализируем размер (64х64)
+		// Initialize of size (64x64)
 		BoxColliderComponent(float width = 64.0f, float height = 64.0f, bool blocks = true)
 		{
 			rect.width = width;
@@ -24,7 +24,7 @@ namespace XYZengine
 
 		void Update(float deltaTime) override
 		{
-			// коллайдер следуют за позицией сущности
+			// Collider is moving for object 
 			auto* t = owner->GetComponent<TransformComponent>();
 			if (t)
 			{
