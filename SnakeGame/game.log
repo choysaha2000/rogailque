@@ -1,9 +1,11 @@
 [INFO] Game logger initialized
 [INFO] Background music loaded
 [INFO] Music started: Resources/music.ogg
-[ERROR] Failed to load texture: Resources/Player.png
+[INFO] Texture loaded: player from Resources/Player.png
 [INFO] Texture loaded: enemy from Resources/apple.png
 [INFO] Texture loaded: wall from Resources/green.png
 [INFO] Creating player
 [INFO] Player HealthComponent initialized
-[ERROR] Texture key not found: player
+[INFO] Creating enemy
+[INFO] Enemy HealthComponent initialized
+[INFO] Creating level walls
