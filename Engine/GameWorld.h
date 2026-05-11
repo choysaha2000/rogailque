@@ -15,7 +15,11 @@ namespace XYZengine
 		{
 			for (auto obj : objects)
 			{
-				obj->Update(deltaTime);
+				if (obj)
+				{
+                            obj->Update(deltaTime);
+					}
+				
 			}
 		}
 
@@ -50,6 +54,18 @@ namespace XYZengine
 				}
 			}
 			return false;
+		}
+
+		// clear old stuff
+
+		void Clear()
+		{
+			for (auto obj : objects)
+			{
+                    delete obj;
+		}
+
+			objects.clear();
 		}
 
 

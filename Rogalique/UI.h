@@ -49,7 +49,7 @@ public:
 
     
     void StartWinState(Game& game);
-    void UpdateWinState(Game& game, float deltaTime);
+    //void UpdateWinState(Game& game, float deltaTime);
     void DrawWin(sf::RenderWindow& window);
 
 
@@ -99,7 +99,7 @@ public:
     void GameOVERUI(Game& game); 
 
     //void UpdatePlayingState(Game& game,float deltaTime, sf::RenderWindow& window);
-    void UpdateGameOverState(Game& game, float deltaTime);
+   // void UpdateGameOverState(Game& game, float deltaTime);
     void StartPlayinState(Game& game);
     void StartGameOverState(Game& game);
 

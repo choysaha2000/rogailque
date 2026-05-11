@@ -1,67 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Pattern">
-      <UniqueIdentifier>{2e2fae76-ab4d-4767-985c-16cb934e04a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cpp">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="GameMain.cpp">
-      <Filter>cpp</Filter>
+    <ClCompile Include="Application.cpp">
+      <Filter>CPP</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>cpp</Filter>
+      <Filter>CPP</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>cpp</Filter>
+    <ClCompile Include="GameMain.cpp">
+      <Filter>CPP</Filter>
     </ClCompile>
     <ClCompile Include="Math.cpp">
-      <Filter>cpp</Filter>
+      <Filter>CPP</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>CPP</Filter>
     </ClCompile>
     <ClCompile Include="States.cpp">
-      <Filter>cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="Block.cpp">
-      <Filter>cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="SolidBlock.cpp">
-      <Filter>cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="Bonus.cpp">
-      <Filter>Pattern</Filter>
+      <Filter>CPP</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="UI.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Block.h" />
-    <ClInclude Include="SolidBlock.h" />
-    <ClInclude Include="ScoreStrategy.h">
-      <Filter>Pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="ScoreObserver.h">
-      <Filter>Pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="GameMemento.h">
-      <Filter>Pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="BonusStrategy.h">
-      <Filter>Pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="Bonus.h">
-      <Filter>Pattern</Filter>
-    </ClInclude>
+    <ClInclude Include="LevelData.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CPP">
+      <UniqueIdentifier>{66ded914-70ad-4150-bf69-5704248ebcc5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

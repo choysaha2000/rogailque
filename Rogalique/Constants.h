@@ -13,8 +13,8 @@ public:
 		return gameWorld;
 	}
 	const std::string RESOURCES_PATH = "Resources/";
-	const int SCREEN_WIDTH = 800;
-	const int SCREEN_HEIGHT = 1000;
+	const int SCREEN_WIDTH = 960;
+	const int SCREEN_HEIGHT = 640;
 
 	
 
